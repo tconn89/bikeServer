@@ -1,0 +1,21 @@
+{
+  "name": "nodejs-interview",
+  "version": "1.0.0",
+  "description": "An project to evaluate understanding of coding with Javascript, callbacks and promises",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
+  },
+  "dependencies": {
+    "@firebase/firestore": "^0.8.5",
+    "bluebird": "^3.3.5",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "firebase": "^5.5.5"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "mocha"
+  }
+}
