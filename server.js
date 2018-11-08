@@ -6,18 +6,15 @@ const bodyParser = require('body-parser');
 const cors = require('cors')
 
 const { router: CaptureRideRoutes } = require('./routes/CaptureRides');
-const { router: PromiseRoutes }  = require('./routes/PromiseTree');
-const { router: SyncRoutes } = require('./routes/SyncTree');
 
 const PORT = process.env.PORT || 4000
 const app = Express();
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(Express.static('public'))
 app.use(cors())
-app.use('/CaptureRides', CaptureRideRoutes);
-app.use('/PromiseTree', PromiseRoutes);
-app.use('/SyncTree', SyncRoutes);
+app.use('/api/CaptureRides', CaptureRideRoutes);
 
 app.use(function (err, req, res, next) {
   console.error(err);
