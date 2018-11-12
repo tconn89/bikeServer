@@ -5,7 +5,7 @@ const IMAGE_DIR = '/var/www/bikedash/public/img'
 
 const main = async () => {
 const {data} = await axios.get(`http://localhost:${PORT}/api/captureRides/index`)
-const arr = data.result.map(elem => ({id: elem.id, hasThumbnail: false}))
+const arr = data.result.filter(elem => !elem.hasThumbnail).map(elem => ({id: elem.id}))
 //const url = 'twitter.com'
 //const url = 'localhost:3001/read/-LQkIIxBut4pTynWptNk'
 const thumbNailWorker = async id => {
@@ -22,11 +22,11 @@ const thumbNailWorker = async id => {
     if(err)
       console.log(err);
   });
+  console.log('Wrote:', id)
 }
 
 arr.forEach(async route => {
-  if(!route.hasThumbnail)
-    await thumbNailWorker(route.id)
+  await thumbNailWorker(route.id)
 })
 }
 main()

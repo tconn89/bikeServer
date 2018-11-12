@@ -26,8 +26,8 @@ const thumbNailWorker = async id => {
 }
 
 arr.forEach(async route => {
-  if(!route.hasThumbnail)
-    await thumbNailWorker(route.id)
+  await thumbNailWorker(route.id)
+  console.log('Wrote: ', route.id)
 })
 }
 main()
