@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@firebase/firestore": "^0.8.5",
+    "axios": "^0.18.0",
     "bluebird": "^3.3.5",
     "cors": "^2.8.4",
     "dotenv": "^6.1.0",

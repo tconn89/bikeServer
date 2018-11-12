@@ -2,7 +2,7 @@ var webshot = require('webshot');
 
 //const url = 'twitter.com'
 //const url = 'localhost:3001/read/-LQkIIxBut4pTynWptNk'
-const url = 'https://149f6c95.ngrok.io/read/-LQkIIxBut4pTynWptNk'
+const url = 'https://coffeelux.club/fullscreen/-LQ4CHlZxypUsq0l-eRV'
 
 const options = {
   takeShotOnCallback: false,
@@ -13,7 +13,8 @@ const options = {
   //   this.console.log(window.location.href)
   // }, context: {console} }
 }
-webshot(url, 'bike1.png',options, function(err) {
+console.log(__dirname)
+webshot(url, __dirname + '/bike2.png',options, function(err) {
   if(err)
     console.log(err);
 });
