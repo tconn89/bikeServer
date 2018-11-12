@@ -3,7 +3,8 @@ if(result.error)
   throw result.error
 const Express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors')
+const cors = require('cors');
+const path = require('path');
 
 const { router: CaptureRideRoutes } = require('./routes/CaptureRides');
 const { router: ThumbnailManager } = require('./routes/ThumbnailManager');
@@ -28,6 +29,10 @@ app.get('/test', (req, res) => {
   console.log('Hello World')
   res.send('Sanity Check Passed')
 })
+
+app.get('/*', function (req, res) {
+   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+ });
 
 app.listen(PORT, function () {
   console.log("Rockin out on port " + PORT + " homie");
