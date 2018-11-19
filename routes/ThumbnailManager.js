@@ -3,8 +3,8 @@ const router = Express.Router();
 const Repo = require('../lib/Repo');
 const fs = require('fs');
 
-//const IMG_DIR = '/var/www/bikedash/public/img'
-const IMG_DIR = '/Users/tyconnors/Workspace/CrossCityRacing/dashboard/public/img'
+const IMG_DIR = '/var/www/bikedash/public/img/thumbs'
+//const IMG_DIR = '/Users/tyconnors/Workspace/CrossCityRacing/dashboard/public/img'
 router.post('/update/meta', async (req, res) => {
   const list = req.body.ids
   const getIds = (list) => {
