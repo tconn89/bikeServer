@@ -8,7 +8,10 @@ var index = 0
 
 const main = async () => {
 const {data} = await axios.get(`http://localhost:${PORT}/api/captureRides/index`)
-const arr = data.result.filter(elem => !elem.hasThumbnail).map(elem => ({id: elem.id}))
+let arr = []
+process.env.ALL ?
+arr = data.result.map(elem => ({id: elem.id}))
+: arr = data.result.filter(elem => !elem.hasThumb).map(elem => ({id: elem.id}))
 
 const thumbNailWorker = async (id, next) => {
   const url = 'https://coffeelux.club/fullscreen/' + id
@@ -18,7 +21,7 @@ const thumbNailWorker = async (id, next) => {
     errorIfJSException: true,
     errorIfStatusIsNot200: false,
     windowSize: { width: 740, height: 420},
-    renderDelay: 6000,
+    renderDelay: 5000,
   }
   return new Promise((resolve, reject) => {
 	  webshot(url, IMAGE_DIR + '/' + id.slice(1) + '.png',options, function(err) {
