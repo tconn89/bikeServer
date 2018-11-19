@@ -1,14 +1,15 @@
+const webshot = require('webshot');
 const axios = require('axios');
 
 const PORT = 8080
-const IMAGE_DIR = '/var/www/bikedash/public/img'
+const IMAGE_DIR = '/var/www/bikedash/public/img/thumbs'
 
 const main = async () => {
 const {data} = await axios.get(`http://localhost:${PORT}/api/captureRides/index`)
 const arr = data.result.filter(elem => !elem.hasThumbnail).map(elem => ({id: elem.id}))
 //const url = 'twitter.com'
 //const url = 'localhost:3001/read/-LQkIIxBut4pTynWptNk'
-const thumbNailWorker = async id => {
+const thumbNailWorker = id => {
   const url = 'https://coffeelux.club/fullscreen/' + id
 
   const options = {
@@ -16,17 +17,17 @@ const thumbNailWorker = async id => {
     errorIfJSException: true,
     errorIfStatusIsNot200: false,
     windowSize: { width: 740, height: 420},
-    renderDelay: 4000,
+    renderDelay: 5000,
   }
-  await webshot(url, IMAGE_DIR + '/' + id.slice(1) + '.png',options, function(err) {
+  webshot(url, IMAGE_DIR + '/' + id.slice(1) + '.png',options, function(err) {
     if(err)
-      console.log(err);
+      return console.log(err);
+    console.log('Wrote: ', id)
   });
-  console.log('Wrote:', id)
 }
 
 arr.forEach(async route => {
-  await thumbNailWorker(route.id)
+  thumbNailWorker(route.id)
 })
 }
 main()
