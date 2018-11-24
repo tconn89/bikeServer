@@ -8,6 +8,7 @@ const path = require('path');
 
 const { router: CaptureRideRoutes } = require('./routes/CaptureRides');
 const { router: ThumbnailManager } = require('./routes/ThumbnailManager');
+const { router: SumMilesWorker } = require('./routes/SumTotalWorker');
 
 const PORT = process.env.PORT || 4000
 const app = Express();
@@ -17,7 +18,8 @@ app.use(bodyParser.json());
 app.use(Express.static('public'))
 app.use(cors())
 app.use('/api/CaptureRides', CaptureRideRoutes);
-app.use('/api/ThumbnailManager', ThumbnailManager);
+app.use('/job/Thumbnail', ThumbnailManager);
+app.use('/job/SumMiles', SumMilesWorker);
 
 app.use(function (err, req, res, next) {
   console.error(err);
