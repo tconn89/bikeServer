@@ -6,12 +6,13 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 
+const { router: CoffeeCounterRoutes } = require('./routes/CoffeeCounter');
 const { router: CaptureRideRoutes } = require('./routes/CaptureRides');
 const { router: ThumbnailManager } = require('./routes/ThumbnailManager');
 const { router: SumMilesWorker } = require('./routes/SumTotalWorker');
 const { router: StravaConnect } = require('./routes/StravaConnect');
 
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 4001
 const app = Express();
 
 app.use(bodyParser.urlencoded({extended: false}));
@@ -22,6 +23,7 @@ app.use('/api/CaptureRides', CaptureRideRoutes);
 app.use('/job/Thumbnail', ThumbnailManager);
 app.use('/job/SumMiles', SumMilesWorker);
 app.use('/api/StravaConnect', StravaConnect);
+app.use('/api/Consumption', CoffeeCounterRoutes);
 
 app.use(function (err, req, res, next) {
   console.error(err);
