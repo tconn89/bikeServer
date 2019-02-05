@@ -1,6 +1,6 @@
 const Express = require('express');
 const router = Express.Router();
-const Repo = require('../lib/CountRepo')
+const { Repo, formatTime } = require('../lib/CountRepo')
 
 router.post('/save', async (req, res) => {
   const { googleId, name, data } = req.body
@@ -13,7 +13,7 @@ router.post('/load', async (req, res) => {
   if(req.body.googleId == undefined)
     return res.status(400).send({error: 'googleId must be defined'})
   let result = await Repo.read(req.body.googleId)
-  return res.send({result})
+  return res.send({result: result.data[formatTime()]})
 })
 
 router.post('/create', async (req, res) => {
