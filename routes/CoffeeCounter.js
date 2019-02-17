@@ -13,7 +13,7 @@ router.post('/load', async (req, res) => {
   if(req.body.googleId == undefined)
     return res.status(400).send({error: 'googleId must be defined'})
   let result = await Repo.read(req.body.googleId)
-  return res.send({result: result.data[formatTime()]})
+  return res.send({ result })
 })
 
 router.post('/create', async (req, res) => {
