@@ -3,6 +3,7 @@ const router = Express.Router();
 const { Repo, formatTime } = require('../lib/CountRepo')
 
 router.post('/save', async (req, res) => {
+  console.log(`SAVE`)
   const { googleId, name, data } = req.body
   console.log(`Updating ${name}`)
   const result = await Repo.update(googleId, name, data)
@@ -13,7 +14,10 @@ router.post('/load', async (req, res) => {
   if(req.body.googleId == undefined)
     return res.status(400).send({error: 'googleId must be defined'})
   let result = await Repo.read(req.body.googleId)
-  return res.send({ result })
+  if(result)
+    return res.send({ result })
+  
+  res.status(401).send({ error: 'Create an account to load data'})
 })
 
 router.post('/create', async (req, res) => {
